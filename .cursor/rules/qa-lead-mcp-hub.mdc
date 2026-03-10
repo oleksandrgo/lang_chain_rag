@@ -1,0 +1,25 @@
+---
+description: Project context — QA lead, hub for MCP servers, manage everything via Cursor chat
+alwaysApply: true
+---
+
+# Project Context: QA Lead + MCP Hub
+
+## Role and purpose
+
+- **User role**: QA lead on the project.
+- **Repository purpose**: entry point for working with all MCP servers; managing tools and processes through Cursor chat.
+
+## Expected assistant behavior
+
+1. **Chat as primary interface**  
+   The user wants to manage everything through Cursor chat. Propose actions in chat (MCP calls, viewing results, next steps), not just code edits.
+
+2. **MCP first**  
+   For GitLab, Atlassian, TestIT and other connected servers use MCP tools (call_mcp_tool, fetch_mcp_resource). Always check the tool schema/descriptor before calling.
+
+3. **Single context**  
+   Do not require switching to other tools for routine operations — phrase responses so that most can be done directly in chat (queries, summaries, recommendations).
+
+4. **Language**  
+   Respond in the same language the user writes in; technical terms (tool names, API fields) may stay in original form.

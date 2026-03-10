@@ -1,0 +1,165 @@
+---
+description: "Use when building or validating test case payloads (draft file, TestIT create). Canonical JSON structure and HTML templates for one test case."
+alwaysApply: false
+---
+# Test Case Payload Format (canonical)
+
+Canonical JSON structure and HTML templates for a single test case. Used by draft files (`drafts/test-cases-draft.json`) and TestIT MCP `testit_create_case`. Skills **docs-to-test-cases** and **testit-plan-create** build payloads from this format.
+
+---
+
+## Full JSON schema (one test case)
+
+```json
+{
+  "summary": "<p>...</p>",
+  "preconditions": "<p>...</p>",
+  "priority": 2,
+  "executionType": 2,
+  "customValues": {
+    "ids": [],
+    "createdValues": []
+  },
+  "steps": [
+    {
+      "name": "<p>Step 1</p>",
+      "executionType": 0,
+      "expectedResult": "<p>Step 1</p>"
+    }
+  ],
+  "isForceUpdate": false,
+  "behaviourGroups": [],
+  "relatedIssues": [
+    {
+      "key": "PROJECT-123",
+      "description": "Issue title",
+      "type": "Task",
+      "iconUrl": "https://..."
+    }
+  ]
+}
+```
+
+### Field notes
+
+| Field | Type | Description |
+|-------|------|-------------|
+| **summary** | string (HTML) | Summary block: User Story, Product, Account type(s), Brand. Use template below. |
+| **preconditions** | string (HTML) | Entry point(s), Entry point(s) for AQA, Note. Use template below. |
+| **priority** | number | e.g. 1–3 (2 = normal). |
+| **executionType** | number | e.g. 2 = Manual (0 = other). |
+| **customValues** | object | `ids`: IDs from MCP `testit_get_fields(project_id)` — use `id` from each field's `values[]` (e.g. Keywords); `createdValues`: empty array. |
+| **steps** | array | Each: `name` (HTML), `executionType` (0), `expectedResult` (HTML). |
+| **isForceUpdate** | boolean | Usually false. |
+| **behaviourGroups** | array | Often empty. |
+| **relatedIssues** | array | At least one. `iconUrl` — always the fixed URL (see relatedIssues format below). |
+
+---
+
+## HTML template — Summary
+
+Use this structure for `summary`. Replace the placeholder text after each label; keep the HTML and green styling for labels.
+
+```html
+<p><span style="color: rgb(102, 153, 102); background-color: transparent; font-weight: bolder;">User Story:&nbsp;</span><br></p>
+<p><span style="font-weight: bolder;"><span style="color: rgb(102, 153, 102);">Product:&nbsp;</span></span></p>
+<p><span style="font-weight: bolder;"><span style="color: rgb(102, 153, 102);">Account type(/s):&nbsp;</span></span><span style="font-weight: bolder;"><br></span></p>
+<p><span style="font-weight: bolder;"><span style="color: rgb(102, 153, 102);">Brand:&nbsp;</span></span></p>
+```
+
+**Filling:** Insert content after each green label (User Story, Product, Account type(s), Brand). Example for User Story: put the story text after `</span><br></p>` on the first line, or in a new `<p>`.
+
+---
+
+## HTML template — Preconditions
+
+Use this structure for `preconditions`. Replace placeholders after labels; keep the blue styling for "Entry point(s) for AQA" and "Note".
+
+```html
+<p><span style="font-weight: bolder; background-color: transparent;"><span style="color: rgb(102, 153, 102);">Entry point(/s):&nbsp;</span></span></p>
+<p><span style="font-weight: bolder; background-color: transparent;"><span style="color: rgb(102, 153, 102);"><br></span></span></p>
+<p><span style="color: rgb(7, 71, 166); font-weight: 700;">Entry point(/s) for AQA:&nbsp;</span><span style="font-weight: bolder; background-color: transparent;"><span style="color: rgb(102, 153, 102);"></span></span></p>
+<p><br></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; line-height: 1.38;"><span style="color: rgb(7, 71, 166); font-weight: 700;">Note:&nbsp;</span></p>
+```
+
+**Filling:** Add Entry points, Entry points for AQA, and Note after the corresponding labels.
+
+---
+
+## Steps format
+
+Each step object:
+
+```json
+{
+  "name": "<p>Action or instruction (e.g. Step 1)</p>",
+  "executionType": 0,
+  "expectedResult": "<p>Expected result for this step</p>"
+}
+```
+
+- **name**: Short HTML paragraph (e.g. `<p>Step 1</p>` or `<p>Open the app and log in.</p>`).
+- **executionType**: Use 0 (default).
+- **expectedResult**: Short HTML paragraph describing the expected outcome.
+
+---
+
+## relatedIssues format
+
+**relatedIssues** must always use the same format. At least one item (Jira ticket) required.
+
+- **key** — Jira ticket id (issue key, e.g. PROJECT-123).
+- **description** — Jira ticket summary (full title or short description).
+- **type** — Jira ticket type (Task, Story, Bug, Epic, etc.).
+- **iconUrl** — always use: `https://jira.ringcentral.com/secure/viewavatar?size=xsmall&avatarId=22485&avatarType=issuetype`
+
+```json
+{
+  "key": "WEBOPS-1348",
+  "description": "Express-setup: Minor release: Update production with new OCI_IMAGE_TAG",
+  "type": "Task",
+  "iconUrl": "https://jira.ringcentral.com/secure/viewavatar?size=xsmall&avatarId=22485&avatarType=issuetype"
+}
+```
+
+---
+
+## Example full payload
+
+```json
+{
+  "summary": "<p><span style=\"color: rgb(102, 153, 102); background-color: transparent; font-weight: bolder;\">User Story:&nbsp;</span><br></p><p><span style=\"font-weight: bolder;\"><span style=\"color: rgb(102, 153, 102);\">Product:&nbsp;</span></span></p><p><span style=\"font-weight: bolder;\"><span style=\"color: rgb(102, 153, 102);\">Account type(/s):&nbsp;</span></span><span style=\"font-weight: bolder;\"><br></span></p><p><span style=\"font-weight: bolder;\"><span style=\"color: rgb(102, 153, 102);\">Brand:&nbsp;</span></span></p>",
+  "preconditions": "<p><span style=\"font-weight: bolder; background-color: transparent;\"><span style=\"color: rgb(102, 153, 102);\">Entry point(/s):&nbsp;</span></span></p><p><span style=\"font-weight: bolder; background-color: transparent;\"><span style=\"color: rgb(102, 153, 102);\"><br></span></span></p><p><span style=\"color: rgb(7, 71, 166); font-weight: 700;\">Entry point(/s) for AQA:&nbsp;</span><span style=\"font-weight: bolder; background-color: transparent;\"><span style=\"color: rgb(102, 153, 102);\"></span></span></p><p><br></p><p style=\"margin-top: 0pt; margin-bottom: 0pt; line-height: 1.38;\"><span style=\"color: rgb(7, 71, 166); font-weight: 700;\">Note:&nbsp;</span></p>",
+  "priority": 2,
+  "executionType": 2,
+  "customValues": {
+    "ids": [322435, 17238940],
+    "createdValues": []
+  },
+  "steps": [
+    {
+      "name": "<p>Step 1</p>",
+      "executionType": 0,
+      "expectedResult": "<p>Step 1</p>"
+    },
+    {
+      "name": "<p>step 2</p>",
+      "executionType": 0,
+      "expectedResult": "<p>step 2</p>"
+    }
+  ],
+  "isForceUpdate": false,
+  "behaviourGroups": [],
+  "relatedIssues": [
+    {
+      "key": "WEBOPS-1348",
+      "description": "Express-setup: Minor release: Update production with new OCI_IMAGE_TAG",
+      "type": "Task",
+      "iconUrl": "https://jira.ringcentral.com/secure/viewavatar?size=xsmall&avatarId=22485&avatarType=issuetype"
+    }
+  ]
+}
+```
+
+Use this as the canonical shape when parsing from docs or building payloads for the MCP server.

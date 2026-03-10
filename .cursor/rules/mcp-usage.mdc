@@ -1,0 +1,28 @@
+---
+description: Basic rules for working with MCP servers via Cursor chat
+alwaysApply: true
+---
+
+# Working with MCP via Cursor chat
+
+## Available MCP servers
+
+- **user-GitLab communication server** — GitLab: releases, MRs, issues, commits, repository tree, labels, projects, groups, etc.
+- **user-atlassian** — Atlassian (Jira, Confluence, etc.).
+- **user-testit** — TestIT (test cases, projects, project tree). Auth: env vars `TESTIT_USERNAME` / `TESTIT_PASSWORD` or `testit_login` tool.
+
+## Required steps before calling MCP
+
+1. **Check tool schema**  
+   Descriptors in `mcps/<server>/tools/<tool-name>.json`. Read the relevant JSON before calling `call_mcp_tool` so arguments are correct.
+
+2. **Invoke**  
+   `call_mcp_tool`: provide `server`, `toolName`, `arguments` (per schema).
+
+3. **Resources**  
+   For reading MCP resources use `fetch_mcp_resource` (server + uri). Resource list is under `mcps/<server>/resources/`.
+
+## In chat
+
+- After an MCP call, show the user a clear summary of results (not raw JSON without explanation).
+- When follow-up steps are needed (e.g. create test case in TestIT, release in GitLab), suggest concrete actions and run them on request in the same chat.

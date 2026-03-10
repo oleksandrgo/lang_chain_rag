@@ -1,0 +1,25 @@
+---
+description: "Use when creating or editing test cases (e.g. in TestIT or docs). Required structure and validation: see validate-test-cases skill and its reference."
+alwaysApply: false
+---
+# 🧪 Test Case Structure Guidelines
+
+When **creating or editing** test cases, follow the required structure. Full criteria, keyword lists, and examples are in the **validate-test-cases** skill.
+
+## Required sections (brief)
+
+| Section | Required |
+|--------|----------|
+| **Summary** | User Story, Product, Brand, Account type(s) — all mandatory |
+| **Preconditions** | Entry points required; Note optional |
+| **Steps** | At least one; active voice, precise verbs; no vague statements |
+| **Keywords** | Min. one product type, one brand, one platform (Web/Mobile); no "automated"/"automatable" |
+| **Test Type** | One of: `end2end`, `BDD`, `Integration`, `UI_Automation` |
+| **Attachments** | Required if SAF account creation in preconditions (.json) |
+| **Linked Requirements / Related Issues** | At least one requirement or related issue linked (в TestIT — секция "Related Issues") |
+
+**For full checklists and allowed keywords** → use the **validate-test-cases** skill (`.cursor/skills/validate-test-cases/reference.md`).
+
+**To validate a test case and get a report** → ask to "validate this test case" or "check test case structure"; the agent will use the validate-test-cases skill and return the structured report.
+
+**Canonical JSON payload and HTML templates** for draft/TestIT: `.cursor/rules/test-case-payload-format.mdc`.

@@ -1,0 +1,44 @@
+---
+description: Required structure for Epics in Jira ticket — Background, Requirement, Brands, Links, Rollout Dates, Acceptance Criteria
+alwaysApply: false
+---
+# Epic Structure Guidelines
+
+When analyzing or creating Epics in the project, verify that all required fields are present and help fill them in as needed.
+
+## 1. **Background**
+> Provides business and technical context.  
+> Explains **why** this task is needed — include purpose, impact, or dependencies.
+
+## 2. **Requirement**
+> A clear and specific description of **what needs to be implemented**.  
+> Focus on system behavior, logic, and expected user interaction.
+
+## 3. **List of Brands to Be Rolled Out**
+> Specify the affected brands — e.g. "All brands" (all supported brands) or a specific list (RC UK, RC AU, etc.).  
+> "All brands" is sufficient; listing each brand is not required.
+
+## 4. **Links**
+> Include all relevant references:  
+> – Figma mockups  
+> – Technical documentation  
+> – API specifications  
+> – Related Jira tickets or Confluence pages  
+
+## 5. **Rollout Dates**
+> Provide the rollout date to prod (when the change will be deployed).  
+> A single date is sufficient; Start–End range and phases are optional.
+
+## 6. **Acceptance Criteria**
+> A bullet-point checklist defining the **conditions for completion**.  
+> Each point should be testable and written clearly.
+
+**Example:**
+- [ ] User can access the new field on both mobile and desktop
+- [ ] Input is validated against backend constraints
+- [ ] Analytics event is triggered and tracked correctly
+
+---
+
+**Assistant actions:**  
+When reviewing an Epic in Jira/Confluence or creating a new Epic, verify that all six sections are present; if anything is missing, suggest wording or content according to this structure.
