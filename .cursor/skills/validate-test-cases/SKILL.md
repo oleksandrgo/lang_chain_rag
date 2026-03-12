@@ -18,7 +18,7 @@ Validates a test case against the project's Test Case Structure and returns a st
 1. **Obtain the test case**  
    From user message, attached file, or referenced artifact (e.g. TestIT). If data is incomplete, ask for the full test case or link.
 
-2. **Check each section** against the criteria in [reference.md](reference.md):
+2. **Check each section** against the criteria in `.cursor/rules/test-case-structure-guidelines.mdc`:
    - Summary (User Story, Product, Brand, Account type(s) — all mandatory)
    - Preconditions (Entry points required; Note optional)
    - Steps (at least one; active voice, precise verbs; no vague statements)
@@ -78,4 +78,4 @@ For **Keywords**, either return "✅ All required keywords are present" or list 
 
 ## Reference
 
-Full checklist, keyword lists, and examples: [reference.md](reference.md).
+Full checklist, keyword lists, and examples: `.cursor/rules/test-case-structure-guidelines.mdc`. This file (reference.md): validation process and report format.

@@ -76,4 +76,4 @@ Use the HTML snippets from `.cursor/rules/test-case-payload-format.mdc` so Summa
 - **Payload schema and HTML templates**: `.cursor/rules/test-case-payload-format.mdc` — exact JSON shape and copy-paste HTML for Summary and Preconditions.
 - **TestIT MCP and testit_get_fields**: [reference.md](reference.md) (this file).
 - **MCP tool descriptor**: `mcps/user-testit/tools/testit_create_case.json`.
-- **Test case structure and keywords**: `.cursor/skills/validate-test-cases/reference.md` and `docs-to-test-cases/reference.md`.
+- **Test case structure and keywords**: `.cursor/rules/test-case-structure-guidelines.mdc`.

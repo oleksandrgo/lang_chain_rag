@@ -21,7 +21,7 @@ Creates one or more test cases from provided documentation (spec, requirements, 
 2. **Extract test scenarios**  
    Identify distinct scenarios, flows, or acceptance criteria that deserve a separate test case. One scenario = one test case (or split into several if a flow is long).
 
-3. **For each scenario, generate a full test case** using the structure in [reference.md](reference.md):
+3. **For each scenario, generate a full test case** using the structure and keywords from `.cursor/rules/test-case-structure-guidelines.mdc`; Output Template and Draft file are in [reference.md](reference.md):
    - **Summary**: User Story, Product, Brand, Account type(s) — infer from doc or ask if missing.
    - **Preconditions**: Entry points (required); Note (optional). If doc mentions SAF account creation, plan for Attachments.
    - **Steps**: At least one; active voice, precise verbs; no vague statements.
@@ -41,20 +41,19 @@ Creates one or more test cases from provided documentation (spec, requirements, 
    - Optionally run **validate-test-cases** on each case before creation.
 
 6. **Optional validation**  
-   Suggest: "Should I validate these test cases?" and run the **validate-test-cases** skill if the user agrees. Can be done before or after editing the draft, or before creating in TestIT.
+   Suggest: "Should I validate these test cases?" and run the **validate-test-cases** skill if the user agrees. For **payload format** (JSON schema and HTML templates), suggest or run the **check-test-case-payload** skill on the draft. Can be done before or after editing the draft, or before creating in TestIT.
 
 ## Rules for Generated Content
 
 - **Summary**: All four sub-fields mandatory. If the doc does not state Product/Brand/Account type, infer reasonable defaults and mention in a note (e.g. "Brand/Product inferred from context; adjust if needed").
 - **Steps**: Use verbs like Click, Enter, Select, Upload, Open, Check, Complete. Avoid "Verify that everything works"; use concrete checks (e.g. "Verify that the username is displayed in the top-right corner").
-- **Keywords**: Use only allowed values from [reference.md](reference.md). Include at least one from Product type, one Brand, one Platform (Web or Mobile).
+- **Keywords**: Use only allowed values from `.cursor/rules/test-case-structure-guidelines.mdc`. Include at least one from Product type, one Brand, one Platform (Web or Mobile).
 - **Test Type**: Choose the most appropriate; if unclear, prefer `end2end` and note it.
 
 ## Reference
 
-Full structure, mandatory fields, and allowed keywords: [reference.md](reference.md).  
-**JSON payload shape and HTML templates** (summary, preconditions, steps, relatedIssues): `.cursor/rules/test-case-payload-format.mdc`.  
-Draft file path and draft wrapper (projectId, suiteId, testCases): [reference.md](reference.md) (Draft file section).  
-Project rules summary: `.cursor/rules/test-case-structure-guidelines.mdc`.  
+Full structure, mandatory fields, and allowed keywords: `.cursor/rules/test-case-structure-guidelines.mdc`.  
+Draft and output template: [reference.md](reference.md).  
+**JSON payload shape and HTML templates**: `.cursor/rules/test-case-payload-format.mdc`.  
 To validate generated cases: use the **validate-test-cases** skill.  
 To create cases in TestIT from the draft: follow step 5 above and use **testit-plan-create** (`.cursor/skills/testit-plan-create/reference.md`) for MCP usage.
