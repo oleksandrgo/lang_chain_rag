@@ -1,0 +1,41 @@
+[
+  {
+    "id" : 797879,
+    "name" : "Integration: Check Fax account is sampled as \"ftue type=disabled\"",
+    "externalId" : "ES-37948",
+    "summary" : "<p><span style=\"color: rgb(102, 153, 102); background-color: transparent; font-weight: bolder;\">User Story:&nbsp;</span><a href=\"https://jira.ringcentral.com/browse/GWA-22902\" target=\"_blank\">GWA-22902</a><br></p><p><span style=\"font-weight: bolder; color: rgb(102, 153, 102);\">Product:&nbsp;</span>Office</p><p><span style=\"font-weight: bolder;\"><span style=\"color: rgb(102, 153, 102);\">Account type(/s):&nbsp;</span></span><span style=\"background-color: transparent;\">Admin</span><span style=\"font-weight: bolder;\"><br></span></p><p><span style=\"font-weight: bolder; color: rgb(102, 153, 102);\">Brand: </span>RC US</p>",
+    "preconditions" : "<p><span style=\"font-weight: bolder;\"><span style=\"color: rgb(102, 153, 102);\">Entry points:&nbsp;</span></span></p><div><p>1.&nbsp;<span style=\"background-color: transparent;\">Create unconfrirmed admin Fax account</span><span style=\"background-color: transparent;\">&nbsp;via AGS</span></p><p style=\"\"><font color=\"#0747a6\"><b>Notes:</b></font></p><ul><li>The test is automated and all steps and checks you can find in&nbsp;<a href=\"https://git.ringcentral.com/AUT.Projects/CW-AES\" target=\"_blank\" style=\"text-decoration: none; background-color: rgb(255, 255, 255); font-family: Roboto; font-weight: 400; color: rgb(7, 71, 166) !important;\">https://git.ringcentral.com/AUT.Projects/CW-AES</a>&nbsp;project</li></ul></div>",
+    "steps" : [
+      {
+        "order" : 0,
+        "name" : "<p>Test is automated</p><p><span style=\"background-color: transparent;\"><br></span></p>",
+        "expectedResult" : "<p>Automation test has to run with status pass</p>",
+        "executionType" : 2
+      }
+    ],
+    "customFields" : [
+      {
+        "name" : "Keywords",
+        "label" : "Keywords",
+        "customValues" : [
+          "RC Office",
+          "GW",
+          "ES_US",
+          "Web",
+          "Wizard"
+        ]
+      },
+      {
+        "name" : "Test type",
+        "label" : "Test type",
+        "customValues" : [
+          "Integration"
+        ]
+      }
+    ],
+    "behaviourGroups" : [
+    ],
+    "executionType" : 1,
+    "priority" : 2
+  }
+]

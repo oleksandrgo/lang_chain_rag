@@ -1,0 +1,53 @@
+[
+  {
+    "id" : 753426,
+    "name" : "BDD: ERL: Informatica: Check 1 address is suggested",
+    "externalId" : "ES-37924",
+    "summary" : "<p><strong style=\"background-color: transparent;\"><span style=\"color:#669966;\">User Story:&nbsp;</span></strong><a href=\"https://jira.ringcentral.com/browse/GWA-22267\" target=\"_blank\">GWA-22267</a><br></p>\n<p><strong style=\"background-color: transparent;\"><span style=\"color:#669966;\">Product:&nbsp;</span></strong><span style=\"background-color: transparent;\">Office</span><br></p>\n<p><span style=\"font-weight: bold; color: rgb(7, 71, 166);\">Brand:</span><span style=\"font-weight: bold; color: rgb(102, 153, 102);\">&nbsp;</span>RC EU<span style=\"background-color: transparent;\">(France,Germany,Netherlands,Ireland,Singapore)</span><span style=\"background-color: transparent;\">/AU/EU/UK/Avaya</span><span style=\"background-color: transparent;\">(France/Netherlands/Ireland/AU)</span><span style=\"background-color: transparent;\">/ATT UB</span><span style=\"background-color: transparent;\">(France,Austria, Germany, Ireland, Italy, Netherlands, Spain,Belguim)/BT</span></p><p><span style=\"color: rgb(102, 153, 102); font-weight: bolder;\">Account type(/s): </span>Admin<strong><br>\n</strong></p>",
+    "preconditions" : "<div><p><strong style=\"background-color: transparent;\"><span style=\"color: rgb(102, 153, 102);\">Entry point(/s):&nbsp;</span></strong></p><ol><li><span style=\"background-color: transparent;\">Create unconfirmed admin account with SP 1075=2</span></li><li>Add cookie&nbsp;\"force_erl_validation\" = 1 and&nbsp;<span style=\"font-weight: bolder;\"><span style=\"font-weight: bolder;\">One suggested&nbsp;&nbsp;address </span></span>from&nbsp;<a href=\"https://testit.ringcentral.com/requirements/requirement/ES-16907\" target=\"_blank\" style=\"text-decoration: none; background-color: rgb(255, 255, 255); font-family: Roboto; font-weight: 400; color: rgb(7, 71, 166) !important;\">ES-16907</a>&nbsp;before opening activation link</li><li>Proceed till ERL step</li></ol></div>\n<p><strong style=\"color: rgb(7, 71, 166);\">Notes:</strong></p><ul>\n<li class=\"u\"><span style=\"background-color: transparent;\">To check all strings change the language to en_us if possible</span><br></li></ul>",
+    "steps" : [
+      {
+        "order" : 1,
+        "name" : "<ol><li>Click \"Edit\" button</li><li>Click \"Update my location info\" button&nbsp;</li></ol>",
+        "expectedResult" : "<p>The following pop-up is displayed:</p><p><b>Title:</b> \"Confirm your address\"</p><p><b>Text:</b> \"We found the following address that seems to match the information that you entered.&nbsp; Please check the address below and confirm if this is the correct address.\"</p><p>Blue check mark icon</p><p><b>Address from cookie configuration</b></p><p><b>Buttons:</b></p><ul><li>\"Back\"</li><li>\"Continue\"</li></ul>",
+        "executionType" : 2
+      },
+      {
+        "order" : 2,
+        "name" : "<p>Click \"Continue\" button</p>",
+        "expectedResult" : "<p>ERL address is updated</p>",
+        "executionType" : 0
+      }
+    ],
+    "customFields" : [
+      {
+        "name" : "Keywords",
+        "label" : "Keywords",
+        "customValues" : [
+          "ES_EU",
+          "ES_UK",
+          "Wizard",
+          "GW",
+          "ES_AVAYA",
+          "Web",
+          "RC Office",
+          "Mobile",
+          "ES_AU",
+          "ES_AT&T_UB",
+          "ES_BT"
+        ]
+      },
+      {
+        "name" : "Test type",
+        "label" : "Test type",
+        "customValues" : [
+          "BDD"
+        ]
+      }
+    ],
+    "behaviourGroups" : [
+    ],
+    "executionType" : 1,
+    "priority" : 0
+  }
+]
