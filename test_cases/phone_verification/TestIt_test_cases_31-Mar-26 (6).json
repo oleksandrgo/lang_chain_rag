@@ -1,0 +1,42 @@
+[
+  {
+    "id" : 403057,
+    "name" : "Integration: Check phone verification functionality",
+    "externalId" : "ES-37444",
+    "summary" : "<p><span style=\"font-weight: bolder;\"><span style=\"color: rgb(102, 153, 102);\">User Story:&nbsp;</span></span><br></p><p><span style=\"font-weight: bolder;\"><span style=\"color: rgb(102, 153, 102);\">Tier(/s):&nbsp;</span></span><span style=\"color: rgb(0, 0, 0);\">Office</span><br></p><p><span style=\"color: rgb(102, 153, 102); font-weight: bolder;\">Brand:&nbsp;</span><span style=\"color: rgb(0, 0, 0);\">CA, Avaya</span></p><p><span style=\"background-color: transparent; font-weight: bolder;\"><span style=\"color: rgb(102, 153, 102);\">Account type(/s):&nbsp;</span></span><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">Admin</span></p>",
+    "preconditions" : "<p><span style=\"font-weight: bolder;\"><span style=\"color: rgb(102, 153, 102);\">Entry points:&nbsp;</span></span></p><ol><li class=\"u\">Create a new unconfirmed account&nbsp;</li></ol><p><span style=\"font-weight: bolder;\">Notes:</span></p><ul><li>The test is automated and all steps and checks you can find in&nbsp;<a href=\"https://git.ringcentral.com/AUT.Projects/CW-AES\" target=\"_blank\" style=\"background-color: rgb(255, 255, 255); font-family: Roboto; font-weight: 400;\">https://git.ringcentral.com/AUT.Projects/CW-AES</a>&nbsp;project</li></ul>",
+    "steps" : [
+      {
+        "order" : 1,
+        "name" : "<p>Test is automated<br></p>",
+        "expectedResult" : "<p>Automation test has to run with status pass<br></p>",
+        "executionType" : 0
+      }
+    ],
+    "customFields" : [
+      {
+        "name" : "Keywords",
+        "label" : "Keywords",
+        "customValues" : [
+          "Wizard",
+          "RC brands",
+          "ES_AVAYA",
+          "GW",
+          "RC Office",
+          "ES_CA"
+        ]
+      },
+      {
+        "name" : "Test type",
+        "label" : "Test type",
+        "customValues" : [
+          "Integration"
+        ]
+      }
+    ],
+    "behaviourGroups" : [
+    ],
+    "executionType" : 1,
+    "priority" : 2
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "id" : 608197,
+    "name" : "BDD: Check thank you page",
+    "externalId" : "ES-37820",
+    "summary" : "<p><strong><span style=\"color: rgb(102, 153, 102);\">User Story: &nbsp;</span></strong><a href=\"https://jira.ringcentral.com/browse/GWA-20696\" target=\"_blank\">GWA-20696</a>,&nbsp;<a href=\"https://jira.ringcentral.com/browse/GWA-21107\" target=\"_blank\">GWA-21107</a><br>\n</p>\n<p><strong><span style=\"color: rgb(102, 153, 102);\">Tier(/s):&nbsp;</span></strong>Office<br>\n</p>\n<p><strong><span style=\"color: rgb(102, 153, 102);\">Brand:&nbsp;</span></strong>UK</p>\n<p><strong><span style=\"color: rgb(102, 153, 102);\">Account type(/s):&nbsp;</span></strong>Admin</p>",
+    "preconditions" : "<ol></ol>\n<p><strong><span style=\"color: rgb(102, 153, 102);\">Entry points:&nbsp;</span></strong></p>\n<ol>\n<li class=\"u\">Create a new unconfirmed account</li><li class=\"u\">Set&nbsp; SP 1169 = 2</li><li class=\"u\">Open activation link</li></ol><p><br></p>",
+    "steps" : [
+      {
+        "order" : 1,
+        "name" : "<p>Observe the page<br></p>",
+        "expectedResult" : "<p>Text - \"Thank you, your information is being verified\"</p><p>Text - \"Whats next: We will contact you if there is an issue. Click below to activate your account.\"</p><p>button - \"Activate\"</p><span data-metadata=\"\"></span><div><span data-metadata=\"\"></span><span data-buffer=\"\"></span></div><div><span data-metadata=\"\"></span><span data-buffer=\"\"></span></div><div><span data-metadata=\"\"></span><span data-buffer=\"\"></span></div><div><span data-metadata=\"\"></span><span data-buffer=\"\"></span></div><div><span data-metadata=\"\"></span><span data-buffer=\"\"></span></div>",
+        "executionType" : 1
+      }
+    ],
+    "customFields" : [
+      {
+        "name" : "Keywords",
+        "label" : "Keywords",
+        "customValues" : [
+          "RC Office",
+          "Wizard",
+          "RC brands",
+          "Web",
+          "ES_UK",
+          "GW"
+        ]
+      },
+      {
+        "name" : "Test type",
+        "label" : "Test type",
+        "customValues" : [
+          "BDD"
+        ]
+      }
+    ],
+    "behaviourGroups" : [
+    ],
+    "executionType" : 1,
+    "priority" : 2
+  }
+]

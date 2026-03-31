@@ -1,0 +1,66 @@
+[
+  {
+    "id" : 604176,
+    "name" : "BDD: Check company address",
+    "externalId" : "ES-37813",
+    "summary" : "<p><strong><span style=\"color: rgb(102, 153, 102);\">User Story: &nbsp;</span></strong><a href=\"https://jira.ringcentral.com/browse/GWA-20696\" target=\"_blank\">GWA-20696</a>,&nbsp;<a href=\"https://jira.ringcentral.com/browse/GWA-20858\" target=\"_blank\">GWA-20858</a>,&nbsp;<a href=\"https://jira.ringcentral.com/browse/GWA-20909\" target=\"_blank\">GWA-20909</a><br>\n</p>\n<p><strong><span style=\"color: rgb(102, 153, 102);\">Tier(/s):&nbsp;</span></strong>Office<br>\n</p>\n<p><strong><span style=\"color: rgb(102, 153, 102);\">Brand:&nbsp;</span></strong>UK</p>\n<p><strong><span style=\"color: rgb(102, 153, 102);\">Account type(/s):&nbsp;</span></strong>Admin</p>",
+    "preconditions" : "<ol></ol>\n<p><strong><span style=\"color: rgb(102, 153, 102);\">Entry points:&nbsp;</span></strong></p>\n<ol>\n<li class=\"u\">Create a new unconfirmed account</li><li class=\"u\">Open activation link&nbsp;</li><li class=\"u\">Go to the Company address page</li></ol><p><span style=\"font-weight: bolder; color: rgb(7, 71, 166);\">Notes:</span></p><ul><li class=\"u\">Fill all fields with valid values, except current</li><li class=\"u\"><span style=\"background-color: transparent;\">To check all strings change the language to en_us if possible</span></li></ul>",
+    "steps" : [
+      {
+        "order" : 1,
+        "name" : "<p>Observe the page<br></p>",
+        "expectedResult" : "<p>Text -&nbsp;Business Information Verification</p><p>Text - Company address</p><p>Field<span style=\"background-color: transparent;\">s:</span></p><ul><li>Company registered number</li><li>Official company name</li><li>Trading name(DBA)</li></ul><p>Button - Add more Trading names</p><p>Field<span style=\"background-color: transparent;\">s:</span></p><ul><li><span style=\"background-color: transparent;\">Official company address (Listed in the Company House Register) - link with value&nbsp;</span>https://find-and-update.company-information.service.gov.uk/</li><li>Road/Street</li><li><span style=\"background-color: transparent;\">City</span></li><li>Post code</li><li><span style=\"background-color: transparent;\">County</span></li><li>Country - United Kingdom (disabled)</li></ul><p>Button - Save and continue (disabled)</p><p><br></p>",
+        "executionType" : 1
+      },
+      {
+        "order" : 2,
+        "name" : "<p>Check fields validation:</p><ol><li>Check \"Company registered number\" with more than 64 symbols</li><li>Check \"Official company name\" with more than 64 symbols</li><li>Check \"Trading name (DBA)\" with more than 64 symbols</li><li>Check \"Official company address (Listed in the Company House Register)\" with more than 64 symbols</li></ol>",
+        "expectedResult" : "<p>Data is not acceptable</p>",
+        "executionType" : 1
+      },
+      {
+        "order" : 3,
+        "name" : "<p><span style=\"background-color: transparent;\">Check trading name functionality</span><br></p><ol><li>Add plus one trading name</li><li>Click button Remove</li></ol>",
+        "expectedResult" : "<ol><li>The new field has been added with the label&nbsp; \"Trading name\", and also appears button \"Remove\"</li><li>Field is deleted</li></ol>",
+        "executionType" : 1
+      },
+      {
+        "order" : 4,
+        "name" : "<p>Add 100 trading names</p>",
+        "expectedResult" : "<p>Button&nbsp; \"Add more Trading names\" is disapeared</p>",
+        "executionType" : 2
+      },
+      {
+        "order" : 5,
+        "name" : "<p>Fill all fields with valid data and clcik b<span style=\"background-color: transparent;\">utton \"Save and continue\" is enabled</span></p>",
+        "expectedResult" : "<p>Redirect to company details page</p>",
+        "executionType" : 0
+      }
+    ],
+    "customFields" : [
+      {
+        "name" : "Keywords",
+        "label" : "Keywords",
+        "customValues" : [
+          "RC brands",
+          "GW",
+          "RC Office",
+          "Web",
+          "ES_UK",
+          "Wizard"
+        ]
+      },
+      {
+        "name" : "Test type",
+        "label" : "Test type",
+        "customValues" : [
+          "BDD"
+        ]
+      }
+    ],
+    "behaviourGroups" : [
+    ],
+    "executionType" : 1,
+    "priority" : 2
+  }
+]

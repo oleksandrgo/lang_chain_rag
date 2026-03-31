@@ -1,0 +1,115 @@
+[
+  {
+    "id" : 107163,
+    "name" : "BDD: Phone Verification page",
+    "externalId" : "ES-34180",
+    "summary" : "<p><strong style=\"background-color: transparent;\"><span style=\"color:#669966;\">User Story: </span><a href=\"https://jira.ringcentral.com/browse/GWA-6628\">GWA-6628</a>,&nbsp;</strong><a href=\"https://jira.ringcentral.com/browse/GWA-21686\" target=\"_blank\">GWA-21686</a><br></p>\n<p><strong style=\"background-color: transparent;\"><span style=\"color:#669966;\">Tier(/s): </span></strong><span style=\"background-color: transparent;\">Office/Phoenix/Fax</span><br></p>\n<p><strong><span style=\"color: rgb(102, 153, 102);\">Brand:&nbsp;</span></strong>UK/EU/US/CA/AU/Charter</p><p><span style=\"font-weight: bolder;\"><span style=\"color: rgb(102, 153, 102);\">Account type(/s):&nbsp;</span></span>Admin</p>",
+    "preconditions" : "<div><strong style=\"background-color: transparent;\"><span style=\"color:#669966\">Entry point(/s):&nbsp;</span></strong><br></div>\n<ol>\n<li class=\"u\">Pass signup and get activation e-mail.</li><li class=\"u\">Set cookie gw_autotest_skip_smb = 1 before opening activation link</li>\n<li class=\"u\">Remember \"Contact number\" which was used as Contact Number on Signup</li>\n<li class=\"u\">To emulate the situation when phone verification is needed set cookie confirm_result - NotConfirmed_RequiresPhoneVerification on <a href=\"http://domain/web/setup/qa.html\" target=\"_blank\">domain/web/setup/qa.html&nbsp;</a>page (Use the correct domain for your environment)&nbsp;</li></ol>\n<p><strong>Note:</strong></p><ul><li class=\"u\"><span style=\"background-color: transparent;\">For brands which possible to change language use en_us locale to check strings in this case.</span><br></li></ul>",
+    "steps" : [
+      {
+        "order" : 1,
+        "name" : "<p>Open activation link in the same browser wher you set cookie</p>",
+        "expectedResult" : "<p>You are redirected to phone verification page</p>",
+        "executionType" : 0
+      },
+      {
+        "order" : 2,
+        "name" : "<p>Observe page</p>",
+        "expectedResult" : "<ol>\n<li class=\"u\">Logo is displayed related to brand.</li>\n<li class=\"u\">Title: \"Mobile Number Verification\".</li>\n<li class=\"u\">Text: \"Use for authentication of your mobile phone number\"</li>\n<li class=\"u\">Text: \"By clicking Next, you will be receiving a phone call in a few seconds that will provide you with a verification code that you must enter in the following screen.\"</li></ol>",
+        "executionType" : 0
+      },
+      {
+        "order" : 3,
+        "name" : "<p>Check the appearing of saved \"Contact number\" in \"Mobile Number\" field<br></p>",
+        "expectedResult" : "<p>The number should be the same as \"Contact number\"</p>",
+        "executionType" : 0
+      },
+      {
+        "order" : 4,
+        "name" : "<p>Leave \"Mobile Number\" input field empty and click \"Next\" button</p>",
+        "expectedResult" : "<p>Placeholder \"(000) 000-0000\" and the \"Next\" button became disabled</p>",
+        "executionType" : 0
+      },
+      {
+        "order" : 5,
+        "name" : "<p>Enter correct number and click \"Next\" button. Check the block</p>",
+        "expectedResult" : "<ol>\n<li class=\"u\">\"Verification code\" field appears&nbsp;</li>\n<li class=\"u\">\"Mobile Number field becomes not editable</li><li class=\"u\"> \"Edit\" button appears</li><li class=\"u\">\"Did not receive the call? Try again!\" link appears&nbsp;</li></ol>",
+        "executionType" : 0
+      },
+      {
+        "order" : 6,
+        "name" : "<p>Click on \"Did not receive the call? Try again!\"&nbsp;</p>",
+        "expectedResult" : "<div>Text: \"Your verification code has been resent to your contact phone number.\" appears</div>",
+        "executionType" : 0
+      },
+      {
+        "order" : 7,
+        "name" : "<ol>\n</ol><p>Click on the \"Edit\" button.<br></p>",
+        "expectedResult" : "\n<ul><li>\"Verification code\" field disappeared</li><li>\"Mobile Number\" field becomes editable</li><li>\"Edit\" button disappeared&nbsp;</li></ul>",
+        "executionType" : 0
+      },
+      {
+        "order" : 8,
+        "name" : "<p>Enter the wrong number and click \"Next\"</p>",
+        "expectedResult" : "<p>An error message \"<span style=\"color: rgb(255, 0, 0);\">The contact phone number you entered appears to be invalid, please check the number and try again</span>\" appears above the field.<br></p>",
+        "executionType" : 1
+      },
+      {
+        "order" : 9,
+        "name" : "<p>Enter correct phone number and&nbsp;<span style=\"background-color: transparent;\">incorrect verification code and press \"Next\"</span></p>",
+        "expectedResult" : "<ol>\n</ol><p>An error message \"<span style=\"color: rgb(255, 0, 0);\">Verification code is not valid</span>\" appear<br></p>",
+        "executionType" : 0
+      },
+      {
+        "order" : 10,
+        "name" : "<div><p>Input correct verification code -&gt; click \"Next\"</p>\n</div>\n<p>&nbsp;</p>",
+        "expectedResult" : "<p>Mobile Number verification passed.&nbsp;</p>",
+        "executionType" : 0
+      }
+    ],
+    "customFields" : [
+      {
+        "name" : "Keywords",
+        "label" : "Keywords",
+        "customValues" : [
+          "RC Office",
+          "ES_Frontier",
+          "ES_US",
+          "ES_UK",
+          "ES_CA",
+          "GW",
+          "Wizard",
+          "Mobile",
+          "ES_Ecotel",
+          "GW ES Release 22.1",
+          "RC Fax",
+          "ES_Charter_Enterprise",
+          "ES_Phoenix",
+          "Web",
+          "ES_MCM",
+          "ES_Eastlink",
+          "ES_AU",
+          "ES_EU"
+        ]
+      },
+      {
+        "name" : "Test type",
+        "label" : "Test type",
+        "customValues" : [
+          "BDD"
+        ]
+      },
+      {
+        "name" : "Useful link",
+        "label" : "Useful link",
+        "customValues" : [
+          "https://git.ringcentral.com/es/express-setup-nova-wmc/-/blob/release_22.3/specs/features/testCases/confiramtion/phoneVerification/ES_34180__Phone_Verification_Page.feature"
+        ]
+      }
+    ],
+    "behaviourGroups" : [
+    ],
+    "executionType" : 1,
+    "priority" : 1
+  }
+]

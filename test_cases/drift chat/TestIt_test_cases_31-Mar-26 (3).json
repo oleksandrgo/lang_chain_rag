@@ -1,0 +1,59 @@
+[
+  {
+    "id" : 792072,
+    "name" : "E2E Drift Chat",
+    "externalId" : "ES-37941",
+    "summary" : "<p><span style=\"font-weight: bolder;\"><span style=\"color: rgb(102, 153, 102);\">User Story: </span></span><a href=\"https://jira.ringcentral.com/browse/GWA-22817\" style=\"font-family: Roboto; font-weight: 400;\">GWA-22817</a><br/></p><p><span style=\"font-weight: bolder; color: rgb(102, 153, 102);\">Product: </span>Office</p><p><span style=\"background-color: transparent; color: rgb(102, 153, 102); font-weight: bolder;\">Brand: </span><span style=\"background-color: transparent;\">RC US/CA</span></p><p><span style=\"font-weight: bolder;\"><span style=\"color: rgb(102, 153, 102);\">Account type(/s): </span></span>Admin</p>",
+    "preconditions" : "<p><span style=\"font-weight: bolder;\"><span style=\"color: rgb(102, 153, 102);\">Entry points:&nbsp;</span></span></p><p><span style=\"font-weight: bolder;\"><span style=\"color: rgb(102, 153, 102);\"><br></span></span><span style=\"background-color: transparent; font-weight: bolder;\">For Office 8.2:</span></p><ul><li>Create account via MVP 8.0&nbsp;signup -&nbsp;[domain] + parameters from&nbsp;<a href=\"https://wiki.ringcentral.com/display/OdessaTeam/US+BrandID+1210\" style=\"text-decoration: none; color: rgb(7, 71, 166) !important;\" target=\"_blank\">List of funnels with entry points US</a></li></ul><p><b>For AIR:</b></p><ul><li><span style=\"background-color: transparent;\">Create account via AIR signup&nbsp;</span>[domain] + parameters from&nbsp;<a href=\"https://wiki.ringcentral.com/display/OdessaTeam/US+BrandID+1210\" style=\"font-family: Roboto; font-weight: 400;\" target=\"_blank\">List of funnels with entry points US</a></li></ul><p><span style=\"color: rgb(7, 71, 166); font-weight: 700;\">Note:&nbsp;</span><span style=\"background-color: transparent;\">&nbsp;</span><span style=\"background-color: transparent;\">Case can be passed only on OPS-Stage or Production environments</span></p>",
+    "steps" : [
+      {
+        "order" : 1,
+        "name" : "<p>Open activation link</p>",
+        "expectedResult" : "<p><span style=\"background-color: transparent;\">Email verification is displayed</span></p><p data-pm-slice=\"0 0 []\">The Drift chat icon appears after 2 sec in the right corner of the page</p>",
+        "executionType" : 0
+      },
+      {
+        "order" : 2,
+        "name" : "<p>Click on&nbsp;<span style=\"background-color: transparent;\">Drift chat icon</span></p>",
+        "expectedResult" : "<p>Drift chat is shown expanded</p><p>Initial bot message \"Hello, How can I help you today?\" is triggered</p>",
+        "executionType" : 0
+      },
+      {
+        "order" : 3,
+        "name" : "<p>Click on \"X\"<span style=\"background-color: transparent;\">&nbsp;icon</span></p>",
+        "expectedResult" : "<p>Drift chat is collapsed</p><p>The chat icon will stay on the lower right page</p>",
+        "executionType" : 0
+      },
+      {
+        "order" : 4,
+        "name" : "<p>Pass Email verification</p><p>Open Drift chat</p><p><br></p>",
+        "expectedResult" : "<p>Drift chat is opened</p>",
+        "executionType" : 0
+      },
+      {
+        "order" : 5,
+        "name" : "Through the entire flow to the end",
+        "expectedResult" : "<p>Chat is displayed on the all pages</p>",
+        "executionType" : 0
+      }
+    ],
+    "customFields" : [
+      {
+        "name" : "Keywords",
+        "label" : "Keywords",
+        "customValues" : [
+          "ES_US",
+          "ES_CA",
+          "Web",
+          "Wizard",
+          "GW",
+          "RC Office"
+        ]
+      }
+    ],
+    "behaviourGroups" : [
+    ],
+    "executionType" : 3,
+    "priority" : 2
+  }
+]
