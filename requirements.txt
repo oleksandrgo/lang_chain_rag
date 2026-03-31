@@ -7,3 +7,5 @@ beautifulsoup4>=4.12,<5
 chromadb>=1,<2
 langchain-chroma>=0.2,<1
 langchain-openai>=0.2,<1
+scikit-learn>=1.5,<2
+plotly>=5.24,<6
