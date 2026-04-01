@@ -12,6 +12,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 from langchain_chroma import Chroma
+
 from langchain_core.documents import Document
 from langchain_openai import OpenAIEmbeddings
 
