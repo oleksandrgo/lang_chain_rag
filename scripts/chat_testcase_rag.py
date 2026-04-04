@@ -97,10 +97,30 @@ def main() -> int:
     )
     retriever = vectorstore.as_retriever(search_kwargs={"k": args.k})
 
-    print("Retriever is ready. Type your request (or 'exit').")
+    piped = not sys.stdin.isatty()
+    if piped:
+        print(
+            "Retriever is ready (piped stdin: one line = one query, then exit).",
+            file=sys.stderr,
+        )
+    else:
+        print("Retriever is ready. Type your request (or 'exit').")
+
     while True:
-        user_query = input("\nYou> ").strip()
+        if piped:
+            line = sys.stdin.readline()
+            if not line:
+                break
+            user_query = line.strip()
+        else:
+            try:
+                user_query = input("\nYou> ").strip()
+            except EOFError:
+                break
+
         if not user_query:
+            if piped:
+                break
             continue
         if user_query.lower() in {"exit", "quit", "q"}:
             print("Bye.")
@@ -109,6 +129,8 @@ def main() -> int:
         docs = retriever.invoke(user_query)
         if not docs:
             print("\nNo relevant documents found in the collection.")
+            if piped:
+                break
             continue
 
         context_for_cursor = format_context_for_cursor(user_query, docs)
@@ -116,6 +138,9 @@ def main() -> int:
         print(context_for_cursor)
         print("\n--- Retrieved sources ---")
         print(format_sources(docs))
+
+        if piped:
+            break
 
     return 0
 

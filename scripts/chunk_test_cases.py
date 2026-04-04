@@ -35,30 +35,143 @@ def steps_to_text(steps: list[dict] | None) -> str:
         name = html_to_text(s.get("name"))
         exp = html_to_text(s.get("expectedResult"))
         block = []
+        order = s.get("order")
+        if order is not None:
+            block.append(f"Order: {order}")
         if name:
             block.append(f"Step: {name}")
         if exp:
             block.append(f"Expected: {exp}")
+        if "executionType" in s:
+            block.append(f"Step execution type (code): {s['executionType']}")
         if block:
             parts.append("\n".join(block))
     return "\n\n".join(parts)
 
 
+def identifiers_to_text(obj: dict) -> str:
+    lines: list[str] = []
+    if obj.get("id") is not None:
+        lines.append(f"TestIT case id: {obj['id']}")
+    ext = obj.get("externalId")
+    if ext is not None and str(ext).strip():
+        lines.append(f"External id: {ext}")
+    return "\n".join(lines)
+
+
+def custom_fields_to_text(raw: object) -> str:
+    if not isinstance(raw, list) or not raw:
+        return ""
+    lines: list[str] = []
+    for item in raw:
+        if not isinstance(item, dict):
+            continue
+        label = (item.get("label") or item.get("name") or "").strip()
+        values = item.get("customValues")
+        if not isinstance(values, list) or not values:
+            continue
+        str_vals = [str(v).strip() for v in values if v is not None and str(v).strip()]
+        if not str_vals:
+            continue
+        header = label if label else "Custom field"
+        lines.append(f"{header}: {', '.join(str_vals)}")
+    return "\n".join(lines)
+
+
+def related_issues_to_text(raw: object) -> str:
+    if not isinstance(raw, list) or not raw:
+        return ""
+    keys = [str(x).strip() for x in raw if x is not None and str(x).strip()]
+    if not keys:
+        return ""
+    return "Related issues: " + ", ".join(keys)
+
+
+def behaviour_groups_to_text(raw: object) -> str:
+    if not isinstance(raw, list) or not raw:
+        return ""
+    lines: list[str] = []
+    for i, bg in enumerate(raw, start=1):
+        if isinstance(bg, dict):
+            name = (bg.get("name") or "").strip()
+            desc = html_to_text(bg.get("description")) if bg.get("description") else ""
+            chunk = f"Behaviour group {i}"
+            if name:
+                chunk += f": {name}"
+            if desc:
+                chunk += f"\n{desc}"
+            lines.append(chunk)
+        else:
+            lines.append(str(bg))
+    return "\n\n".join(lines)
+
+
+def execution_attrs_to_text(obj: dict) -> str:
+    lines: list[str] = []
+    if "executionType" in obj and obj["executionType"] is not None:
+        lines.append(f"Case execution type (code): {obj['executionType']}")
+    if "priority" in obj and obj["priority"] is not None:
+        lines.append(f"Priority (code): {obj['priority']}")
+    return "\n".join(lines)
+
+
 def testcase_to_page_content(obj: dict) -> str:
+    id_block = identifiers_to_text(obj)
     name = (obj.get("name") or "").strip()
     summary = html_to_text(obj.get("summary"))
+    custom_txt = custom_fields_to_text(obj.get("customFields"))
+    related_txt = related_issues_to_text(obj.get("relatedIssues"))
+    behaviour_txt = behaviour_groups_to_text(obj.get("behaviourGroups"))
+    attrs_txt = execution_attrs_to_text(obj)
     pre = html_to_text(obj.get("preconditions"))
     steps_text = steps_to_text(obj.get("steps"))
-    sections = []
+    sections: list[str] = []
+    if id_block:
+        sections.append(id_block)
     if name:
         sections.append(f"Name: {name}")
     if summary:
         sections.append(f"Summary:\n{summary}")
+    if custom_txt:
+        sections.append(f"Custom fields:\n{custom_txt}")
+    if related_txt:
+        sections.append(related_txt)
+    if behaviour_txt:
+        sections.append(f"Behaviour groups:\n{behaviour_txt}")
+    if attrs_txt:
+        sections.append(attrs_txt)
     if pre:
         sections.append(f"Preconditions:\n{pre}")
     if steps_text:
         sections.append(f"Steps:\n{steps_text}")
     return "\n\n".join(sections)
+
+
+def testcase_metadata_extra(obj: dict) -> dict[str, str]:
+    """Flat strings for vector DB metadata (Chroma-friendly)."""
+    extra: dict[str, str] = {}
+    keywords: list[str] = []
+    test_type = ""
+    for item in obj.get("customFields") or []:
+        if not isinstance(item, dict):
+            continue
+        label = (item.get("label") or item.get("name") or "").strip().lower()
+        values = item.get("customValues")
+        if not isinstance(values, list):
+            continue
+        str_vals = [str(v).strip() for v in values if v is not None and str(v).strip()]
+        if not str_vals:
+            continue
+        if label == "keywords":
+            keywords.extend(str_vals)
+        elif "test type" in label or label == "testtype":
+            test_type = str_vals[0]
+    if keywords:
+        joined = ", ".join(keywords)
+        extra["keywords"] = joined[:4000] if len(joined) > 4000 else joined
+    if test_type:
+        extra["test_type"] = test_type[:512]
+    return extra
 
 
 def iter_json_files(root: Path) -> Iterator[Path]:
@@ -118,6 +231,7 @@ def load_documents(
                 "external_id": external if external is not None else "",
                 "suite": suite,
             }
+            meta.update(testcase_metadata_extra(obj))
             documents.append(Document(page_content=content, metadata=meta))
 
     return documents, warnings
